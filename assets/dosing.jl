@@ -14,8 +14,8 @@ end_treat = 42.0
 
 #dose amounts
 avg_huma_surface_area = 1.7 #m^2
-tmz_treat_dose = 75.0*avg_huma_surface_area #360*mg_correcttion #0.075*1.7
-tmz_adjuv_dose = 150.0*avg_huma_surface_area #0.150*1.7
+tmz_treat_dose = 75.0*avg_huma_surface_area
+tmz_adjuv_dose = 150.0*avg_huma_surface_area
 dose_amount = 1800.0*avg_huma_surface_area
 
 #treatment phase (SOC)

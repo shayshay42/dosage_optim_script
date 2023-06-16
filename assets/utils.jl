@@ -3,17 +3,17 @@ using Plots, LinearAlgebra, Statistics
 """
     trapezoidal_rule(t, y)
 
-Calculate the area under a curve defined by `x` and `y` coordinates using the trapezoidal rule. This numerical integration method works by approximating the region under the curve as a series of trapezoids and then calculating the sum of their areas.
+Calculate the area under a curve defined by 'x' and 'y' coordinates using the trapezoidal rule. This numerical integration method works by approximating the region under the curve as a series of trapezoids and then calculating the sum of their areas.
 
 # Arguments
-- `t::Vector`: A vector of `x` values (time points) in ascending order.
-- `y::Vector`: A vector of `y` values (concentration levels) corresponding to each `x` value.
+- 't::Vector': A vector of 'x' values (time points) in ascending order.
+- 'y::Vector': A vector of 'y' values (concentration levels) corresponding to each 'x' value.
 
 # Returns
-- `Float`: The approximate area under the curve, as calculated by the trapezoidal rule.
+- 'Float': The approximate area under the curve, as calculated by the trapezoidal rule.
 
 # Example
-```julia
+'''julia
 julia> t = 0:0.1:1;
 julia> y = t.^2;
 julia> trapezoidal_rule(t, y)
@@ -32,51 +32,50 @@ end
 """
     spaced_list(p, n, m, b=1)
 
-Create a list of integers where `n` numbers are sequentially appended 
-followed by a jump of `m` numbers. This pattern is repeated until 
-the end number `p` is reached or surpassed. 
+Create a list of integers where 'n' numbers are sequentially appended 
+followed by a jump of 'm' numbers. This pattern is repeated until 
+the end number 'p' is reached or surpassed. 
 
 Optionally, the start of the sequence can be adjusted from the 
-default of `1` with the `b` parameter.
+default of '1' with the 'b' parameter.
 
 # Arguments
-- `p::Integer`: The final number of the sequence. The function will stop 
+- 'p::Integer': The final number of the sequence. The function will stop 
   adding numbers to the list once this number is reached or surpassed.
-- `n::Integer`: The number of sequential integers to append to the list 
+- 'n::Integer': The number of sequential integers to append to the list 
   at a time.
-- `m::Integer`: The number of integers to skip in the sequence after 
-  each set of `n` integers is added.
-- `b::Integer`: (optional) The beginning number of the sequence. Default 
-  is `1`.
+- 'm::Integer': The number of integers to skip in the sequence after 
+  each set of 'n' integers is added.
+- 'b::Integer': (optional) The beginning number of the sequence. Default 
+  is '1'.
 
 # Returns
-- `Array{Integer}`: An array of integers that follows the specified 
+- 'Array{Integer}': An array of integers that follows the specified 
   sequential pattern.
 
 # Example
-```julia
+'''julia
 julia> spaced_list(20, 2, 3)
 [1, 2, 6, 7, 11, 12, 16, 17]
 """
 function spaced_list(p, n, m, b=1)
   # Can be optimized...
   
-  # Initialize an empty list
   spaced_list = []
-  # Initialize a counter variable
+  #iniialize counter
   counter = b
-  # Use a while loop to iterate through the range of integers
+  #range of integers
   while counter <= p
-    # Append `n` integers spaced by 1 to the list
+    #append n integers spaced by 1 to the list
     for i in 1:n
       spaced_list = [spaced_list; counter]
       counter += 1
-      # Check if the counter has reached the end of the range
+
       if counter > p
         break
       end
     end
-    # Add `m` to the counter to create the jump
+    #add m to create the jump
     counter += m
   end
   return spaced_list
@@ -92,12 +91,12 @@ and also stores each loss value in the returned list. The callback is intended t
 optimization routine from the Optimization.jl package.
 
 # Returns
-- `track_progress::Function`: the callback function that takes `iter` (the current epoch number) and 
-  `x` (the current parameter values) as arguments, computes the loss, and stores it in `loss_values`.
-- `loss_values::Vector`: a list to hold the loss values computed during the optimization.
+- 'track_progress::Function': the callback function that takes 'iter' (the current epoch number) and 
+  'x' (the current parameter values) as arguments, computes the loss, and stores it in 'loss_values'.
+- 'loss_values::Vector': a list to hold the loss values computed during the optimization.
 
 # Example
-```julia
+'''julia
 callback, loss_values = create_callback()
 options = Optimization.Options(callback = callback, maxiters = 50)
 res = Optimization.solve(optprob, opt, options)
@@ -108,16 +107,15 @@ res = Optimization.solve(optprob, opt, options)
 function create_callback()
   loss_values = []
   function track_progress(iter, x)
-      # Compute the loss
       current_loss = loss(x)
 
-      # Print the epoch and loss
       println("Epoch: $iter, Loss: $current_loss")
 
-      # Save the loss in the local list
+      #save loss in local list
       push!(loss_values, current_loss)
-
-      return false  # return `false` to continue the optimization
+      
+      #continue the optimization
+      return false  
   end
   return track_progress, loss_values
 end
