@@ -23,10 +23,10 @@ loss(doses)
 
 @time @show Zygote.gradient(loss, doses)
 
-adtype = Optimization.AutoZygote()
-optf = Optimization.OptimizationFunction((x,_)->loss(x), adtype)
-optprob = Optimization.OptimizationProblem(optf, doses)
-callback, loss_values = create_callback()
-opt = ADAM(0.1)
-@time res = Optimization.solve(optprob, opt, callback = callback, maxiters=50)
-@show res.u
+# adtype = Optimization.AutoZygote()
+# optf = Optimization.OptimizationFunction((x,_)->loss(x), adtype)
+# optprob = Optimization.OptimizationProblem(optf, doses)
+# callback, loss_values = create_callback()
+# opt = ADAM(0.1)
+# @time res = Optimization.solve(optprob, opt, callback = callback, maxiters=50)
+# @show res.u
