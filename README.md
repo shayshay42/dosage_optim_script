@@ -1,25 +1,16 @@
-# Therapeutic Dose Optimization
+# Dosage Optimization (Simple)
 
 This repository contains the implementation of a differential equation-based model to optimize therapeutic dosages for a two-drug treatment of glioblastoma.
 
 ## Repository Structure
-.
+.  
 ├── assets  
 │ ├── dosing.jl  
 │ ├── model.jl  
 │ ├── params.jl  
 │ └── utils.jl  
-└── src  
-  └── optimize.jl  
-- Project Root
-  - assets
-    - dosing.jl
-    - model.jl
-    - params.jl
-    - utils.jl
-  - src
-    - optimize.jl
-
+├── src    
+│ └── optimize.jl  
 
 ## Files and Folders Description
 
@@ -34,5 +25,7 @@ This repository contains the implementation of a differential equation-based mod
 
 ## How to Run
 
-Run optimize.jl
+Run **optimize.jl**
 Caution! the files here are one splitup script and some variables are hard coded in separate files.
+
+![RESULT GIF](./result.gif)
