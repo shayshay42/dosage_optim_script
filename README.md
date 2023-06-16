@@ -1,9 +1,8 @@
-# Project Title: Therapeutic Dose Optimization
+# Therapeutic Dose Optimization
 
-This repository contains the implementation of a differential equation-based model to optimize therapeutic dosages for a two-drug treatment protocol. It uses a Julia language script to model the pharmacokinetic (PK) and pharmacodynamic (PD) properties of the drugs.
+This repository contains the implementation of a differential equation-based model to optimize therapeutic dosages for a two-drug treatment of glioblastoma.
 
 ## Repository Structure
-
 .
 ├── assets
 │ ├── dosing.jl
@@ -12,6 +11,14 @@ This repository contains the implementation of a differential equation-based mod
 │ └── utils.jl
 └── src
   └── optimize.jl
+- Project Root
+  - assets
+    - dosing.jl
+    - model.jl
+    - params.jl
+    - utils.jl
+  - src
+    - optimize.jl
 
 
 ## Files and Folders Description
