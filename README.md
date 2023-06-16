@@ -4,13 +4,13 @@ This repository contains the implementation of a differential equation-based mod
 
 ## Repository Structure
 .
-├── assets
-│ ├── dosing.jl
-│ ├── model.jl
-│ ├── params.jl
-│ └── utils.jl
-└── src
-  └── optimize.jl
+├── assets  
+│ ├── dosing.jl  
+│ ├── model.jl  
+│ ├── params.jl  
+│ └── utils.jl  
+└── src  
+  └── optimize.jl  
 - Project Root
   - assets
     - dosing.jl
