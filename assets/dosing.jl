@@ -19,7 +19,7 @@ tmz_adjuv_dose = 150.0*avg_huma_surface_area
 dose_amount = 1800.0*avg_huma_surface_area
 
 #treatment phase (SOC)
-tmz_treat_dosetimes = spaced_list(end_treat,1,0,0).*hours
+tmz_treat_dosetimes = spaced_list(end_treat,1.0,0.0,0.0).*hours
 function tmz_treat!(integrator)
     SciMLBase.set_proposed_dt!( integrator, 0.01)
     integrator.u[3] += tmz_treat_dose
@@ -27,7 +27,7 @@ end
 tmz_treat_hit = PresetTimeCallback(tmz_treat_dosetimes, tmz_treat!);
 
 #adjuvant/maintenance phase (SOC
-tmz_adjuv_dosetimes = spaced_list(end_time,5,23,end_treat+28).*hours
+tmz_adjuv_dosetimes = spaced_list(end_time,5.0,23.0,end_treat+28.0).*hours
 function tmz_adjuv!(integrator)
     SciMLBase.set_proposed_dt!( integrator, 0.01)
     integrator.u[3] += tmz_adjuv_dose
@@ -35,7 +35,7 @@ end
 tmz_adjuv_hit = PresetTimeCallback(tmz_adjuv_dosetimes, tmz_adjuv!);
 
 #drug2 to optimize
-rg_dosetimes = spaced_list(end_time-1,18,10,0).*hours
+rg_dosetimes = spaced_list(end_time-1.0,18.0,10.0,0.0).*hours
 doses = ones(length(rg_dosetimes)).*dose_amount
 function rg_dose!(integrator)
     SciMLBase.set_proposed_dt!( integrator, 0.01)

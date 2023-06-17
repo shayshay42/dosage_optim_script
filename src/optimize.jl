@@ -2,6 +2,7 @@ using DifferentialEquations, Zygote, SciMLSensitivity, Optimization, Optim, Opti
 
 include("../assets/model.jl")
 include("../assets/dosing.jl")
+include("../assets/params.jl")
 include("../assets/utils.jl")
 
 u0 = [17.7,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
@@ -28,5 +29,5 @@ loss(doses)
 # optprob = Optimization.OptimizationProblem(optf, doses)
 # callback, loss_values = create_callback()
 # opt = ADAM(0.1)
-# @time res = Optimization.solve(optprob, opt, callback = callback, maxiters=50)
+# @time res = Optimization.solve(optprob, opt, callback = callback, maxiters=1)
 # @show res.u
