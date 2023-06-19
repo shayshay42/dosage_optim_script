@@ -106,16 +106,16 @@ res = Optimization.solve(optprob, opt, options)
 """
 function create_callback()
   loss_values = []
-  function track_progress(iter, x)
+  iter = 1
+  function track_progress(x, current_loss)
       current_loss = loss(x)
-
       println("Epoch: $iter, Loss: $current_loss")
-
+      iter += 1
       #save loss in local list
       push!(loss_values, current_loss)
       
       #continue the optimization
       return false  
   end
-  return track_progress, loss_values
+  return track_progress, loss_values, iter
 end

@@ -39,8 +39,23 @@ rg_dosetimes = spaced_list(end_time-1.0,18.0,10.0,0.0).*hours
 doses = ones(length(rg_dosetimes)).*dose_amount
 function rg_dose!(integrator)
     SciMLBase.set_proposed_dt!( integrator, 0.01)
-    hit_rg = integrator.p[length(ode_params)+1:end][findall(x->x==integrator.t,rg_dosetimes)][1]
-    integrator.u[6] += relu(hit_rg)
+    try
+        inject = integrator.p[length(ode_params)+1:end][findall(t->t==integrator.t,rg_dosetimes)][1]
+        integrator.u[6] += relu(inject)
+    catch e
+        if isa(e, BoundsError)
+            println("Caught a BoundsError. The problematic index is: ")
+            println(integrator.t)
+            println(findall(t->t==integrator.t,rg_dosetimes))
+            println(findfirst(t->t==integrator.t,rg_dosetimes))
+            println(integrator.p)
+            println(length(ode_params))
+            println(integrator.p[length(ode_params)+1:end])
+            println(integrator.p[length(ode_params)+1:end][findall(t->t==integrator.t,rg_dosetimes)])
+        else
+            rethrow(e)  # if it's a different type of error, throw it again
+        end
+    end
 end
 hit_rg = PresetTimeCallback(rg_dosetimes, rg_dose!);
 
