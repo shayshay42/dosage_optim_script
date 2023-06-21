@@ -107,17 +107,17 @@ res = Optimization.solve(optprob, opt, options)
 function create_callback()
   loss_values = []
   iter = 1
-  # anim = Animation()
+  anim = Animation()
   function track_progress(x, current_loss)
       println("Epoch: $iter, Loss: $current_loss")
       iter += 1
       #save loss in local list
       push!(loss_values, current_loss)
-      # frame(anim, plotter(sim(x)))
+      frame(anim, plotter(sim(x)))
       #continue the optimization
       return false  
   end
-  return track_progress, loss_values, iter
+  return track_progress, loss_values, iter, anim
 end
 
 """
@@ -164,9 +164,9 @@ function plotter(sol)
   return p1
 end
 
-# function sim(x)
-#   q = [ode_params;x]
-#   tmp_prob = remake(prob, p=q)
-#   tmp_sol = solve(tmp_prob, p=q, callback=hit)
-#   return sol
-# end
+function sim(x)
+  q = [ode_params;x]
+  tmp_prob = remake(prob, p=q)
+  tmp_sol = solve(tmp_prob, p=q, callback=hit)
+  return tmp_sol
+end
